@@ -47,8 +47,10 @@ const SetupStep: React.FC<SetupStepProps> = ({ onComplete }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.targetRole) { alert("Please enter a target role."); return; }
+    if (!formData.resumeFile) {alert("Please upload your resume to continue."); return;}
     setLoading(true);
     setTimeout(() => { onComplete(formData); setLoading(false); }, 800);
+    
   };
 
   const inputClass = "w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-sm text-[#191919] placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-150";
@@ -194,7 +196,8 @@ const SetupStep: React.FC<SetupStepProps> = ({ onComplete }) => {
 
                 <div>
                   <label className="block text-xs font-bold text-[#191919] uppercase tracking-wide mb-2">
-                    Resume <span className="text-gray-400 normal-case font-normal text-xs">(PDF or image)</span>
+                    Resume <span className="text-red-500 normal-case font-normal">*required</span>
+                    <span className="text-gray-400 normal-case font-normal text-xs">(PDF or image)</span>
                   </label>
 
                   {formData.resumeFile ? (
